@@ -26,7 +26,7 @@ from chicago_preprocessor/transformers import DateFormatter, DateEncoder
 
 
 df = pd.read_csv(
-    "https://tf-assets-prod.s3.amazonaws.com/tf-curric/data-science/traffic_crashes_chicago.csv"
+    "data/traffic_crashes_chicago.csv"
 )
 
 # Make some sample "new" data
