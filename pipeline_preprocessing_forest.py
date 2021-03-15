@@ -28,10 +28,6 @@ from chicago_preprocessor.transformers import (
 
 df = pd.read_csv("data/traffic_crashes_chicago.csv")
 
-# Make some sample "new" data
-df, df_new = train_test_split(df, test_size=30000)
-X_new = df_new.drop(columns="DAMAGE")
-
 # Separate out columns to be treated differently
 
 # Outcome variable
