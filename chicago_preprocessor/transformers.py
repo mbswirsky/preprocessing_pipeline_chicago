@@ -1,5 +1,7 @@
+import numpy as np
 import pandas as pd
 from sklearn.base import TransformerMixin
+
 
 class NullMaker(TransformerMixin):
     """
@@ -10,7 +12,7 @@ class NullMaker(TransformerMixin):
         return self
 
     def transform(self, X):
-        Xnulls = X.replace(['UNABLE TO DETERMINE', 'NOT APPLICABLE', 'UNKNOWN'], np.nan)
+        Xnulls = X.replace(["UNABLE TO DETERMINE", "NOT APPLICABLE", "UNKNOWN"], np.nan)
         return Xnulls
 
 
@@ -23,7 +25,7 @@ class BeatFormatter(TransformerMixin):
         return self
 
     def transform(self, X):
-        dfs=[]
+        dfs = []
         X = pd.DataFrame(X)
         for col in X:
             Xbeat = X[col].astype(str).str[:-2].str.zfill(4).str[:2]
@@ -55,9 +57,11 @@ class DateEncoder(TransformerMixin):
 
     def transform(self, X):
         # assumes X is a DataFrame of datetime dtypes
-        dfs=[]
+        dfs = []
         for col in X:
             dt = X[col].dt
-            df_dt = pd.concat([dt.year, dt.month, dt.dayofweek, dt.day, dt.hour], axis=1)
+            df_dt = pd.concat(
+                [dt.year, dt.month, dt.dayofweek, dt.day, dt.hour], axis=1
+            )
             dfs.append(df_dt)
         return pd.concat(dfs, axis=1)
